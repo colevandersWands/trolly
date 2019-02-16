@@ -4,10 +4,20 @@ AFRAME.registerComponent('cursor-listener', {
 
     function sendExperimentData(data){
       // should use Fetch instead
+      /*
       const datapointAddRequest = new XMLHttpRequest();
       datapointAddRequest.onload = function() { console.log(this.responseText, " Check result at " + window.location.origin + "/results.html "); };
       datapointAddRequest.open('get', '/addDatapoint' + "?datapoint=" + encodeURIComponent(data), true );
       datapointAddRequest.send();
+      */
+      
+      fetch('/addDatapoint' + "?datapoint=" + encodeURIComponent(data),)
+      .then(function(response) {
+        return response;
+      })
+      .then(function(reponse) {
+        console.log(reponse, " Check result at " + window.location.origin + "/results.html ");
+      });
     }
     
     document.querySelector("#camera-rig").setAttribute("animation", "dur", experiment.animationDuration)
