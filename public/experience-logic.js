@@ -2,15 +2,7 @@ AFRAME.registerComponent('cursor-listener', {
   init: function () {
     var el = this.el;
 
-    function sendExperimentData(data){
-      // should use Fetch instead
-      /*
-      const datapointAddRequest = new XMLHttpRequest();
-      datapointAddRequest.onload = function() { console.log(this.responseText, " Check result at " + window.location.origin + "/results.html "); };
-      datapointAddRequest.open('get', '/addDatapoint' + "?datapoint=" + encodeURIComponent(data), true );
-      datapointAddRequest.send();
-      */
-      
+    function sendExperimentData(data){      
       fetch('/addDatapoint' + "?datapoint=" + encodeURIComponent(data),)
       .then(function(response) {
         return response;
