@@ -7,12 +7,12 @@
   <body>
 <script>    
 var experiment = {
-  // user configurable
-  randomness         : AFRAME.utils.getUrlParameter("randomness")        || false,
-  leftTargets        : AFRAME.utils.getUrlParameter("leftTargets")       || 1,
-  rightTargets       : AFRAME.utils.getUrlParameter("rightTargets")      || 3,
-  animationDuration  : AFRAME.utils.getUrlParameter("animationDuration") || 10000, //ms
-  // state
+  // user configurable, cf /research for setup via form
+  randomness         : ( AFRAME.utils.getUrlParameter("randomness") === 'true')   || false,
+  leftTargets        : Number( AFRAME.utils.getUrlParameter("leftTargets") )      || 1,
+  rightTargets       : Number( AFRAME.utils.getUrlParameter("rightTargets") )     || 3,
+  animationDuration  : AFRAME.utils.getUrlParameter("animationDuration")          || 10000, //ms
+  // internal application state
   pushedLever        : false,
   ready              : false,
   finished           : false,
