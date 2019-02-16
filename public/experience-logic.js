@@ -28,9 +28,10 @@ AFRAME.registerComponent('experiment-setup', {
 AFRAME.registerComponent('cursor-listener', {
   init: function () {
     var el = this.el;
-
+    var secretQuery = "";
+    if (experiment.secret) secretQuery = "&secret=" + experiment.secret;
     function sendExperimentData(data){      
-      fetch('/addDatapoint' + "?datapoint=" + encodeURIComponent(data),)
+      fetch('/addDatapoint' + "?datapoint=" + encodeURIComponent(data) + secretQuery,)
       .then(function(response) {
         return response;
       })

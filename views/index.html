@@ -8,6 +8,7 @@
 <script>    
 var experiment = {
   // user configurable, cf /research for setup via form
+  secret             : AFRAME.utils.getUrlParameter("secret")                     || false,
   randomness         : ( AFRAME.utils.getUrlParameter("randomness") === 'true')   || false,
   leftTargets        : Number( AFRAME.utils.getUrlParameter("leftTargets") )      || 1,
   rightTargets       : Number( AFRAME.utils.getUrlParameter("rightTargets") )     || 3,
