@@ -16,6 +16,11 @@ AFRAME.registerComponent('cursor-listener', {
     document.querySelector("#camera-rig").setAttribute("animation__left", "dur", experiment.animationDuration)
     document.querySelector("#camera-rig").setAttribute("animation__right", "dur", experiment.animationDuration)
     
+    for (var i=0; i<experiment.leftTargets; i++){
+      document.querySelector("#camera-rig").
+    }
+    // <a-entity id="human1" class="human" position="0 0 0" gltf-model="#morty"></a-entity>
+    
     this.el.addEventListener('click', function (evt) {
       console.log( el.id, 'was clicked at' ); 
       switch ( el.id ){
