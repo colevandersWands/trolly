@@ -5,8 +5,6 @@ let datapoints = [];
 
 // define variables that reference elements on our page
 const datapointsList = document.getElementById('datapoints');
-const datapointsForm = document.forms[0];
-const datapointInput = datapointsForm.elements['datapoint'];
 
 // a helper function to call when our request for datapoints is done
 const getDatapointsListener = function() {
@@ -40,20 +38,3 @@ const appendNewDatapoint = function(datapoint) {
   newListItem.innerHTML = datapoint;
   datapointsList.appendChild(newListItem);
 }
-
-// listen for the form to be submitted and add a new datapoint when it is
-datapointsForm.onsubmit = function(event) {
-  // stop our form submission from refreshing the page
-  event.preventDefault();
-
-  // get datapoint value and add it to the list
-  datapoints.push(datapointInput.value);
-  appendNewDatapoint(datapointInput.value);
-  //datapointAddRequest.open('get', '/addDatapoint', {datapoint: datapointInput.value} );
-  datapointAddRequest.open('get', '/addDatapoint' + "?datapoint=" + encodeURIComponent(datapointInput.value), true );
-  datapointAddRequest.send();
-
-  // reset form 
-  datapointInput.value = '';
-  datapointInput.focus();
-};

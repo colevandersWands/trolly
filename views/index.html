@@ -9,21 +9,14 @@ var experiment = {}
 experiment.pushedLever = false;
 experiment.ready = false;
 experiment.finished = false;
-
-AFRAME.registerComponent('datasender', {
-  schema: {default: "Left"},
-  init: function () {
-    var data = this.data
-    this.el.addEventListener('click', function (evt) {
-      console.log('I was clicked at: ', data );  
-      const datapointAddRequest = new XMLHttpRequest();
-      datapointAddRequest.onload = function() { console.log(this.responseText, " Check result at " + window.location.origin + "/flat.html "); };
-      datapointAddRequest.open('get', '/addDatapoint' + "?datapoint=" + encodeURIComponent(data), true );
-      datapointAddRequest.send();
-    });
-  }
-});
+experiment.aninationDuration = 5000; //ms
   
+function sendExperimentData(data){
+    const datapointAddRequest = new XMLHttpRequest();
+    datapointAddRequest.onload = function() { console.log(this.responseText, " Check result at " + window.location.origin + "/flat.html "); };
+    datapointAddRequest.open('get', '/addDatapoint' + "?datapoint=" + encodeURIComponent(data), true );
+    datapointAddRequest.send();
+}
   
 AFRAME.registerComponent('cursor-listener', {
   init: function () {
@@ -35,10 +28,14 @@ AFRAME.registerComponent('cursor-listener', {
           el.emit("pushed")
           document.querySelector("#camera-rig").emit("go")
           setTimeout(function(){ 
-            if ( experiment.pushedLever )
-              el.emit("goleft") 
-            else el.emit("goright") 
-          }, 1500); // matching the animation duration
+            if ( experiment.pushedLever ){
+              el.emit("goleft")
+              sendExperimentData("Left")
+            } else {
+              el.emit("goright")
+              sendExperimentData("Right")
+            }
+          }, experiment.aninationDuration);
           for (instruction of document.querySelectorAll(".instructions") )
             instruction.setAttribute("visible", false)
           break;
@@ -56,9 +53,6 @@ AFRAME.registerComponent('cursor-listener', {
   
   
 /* 
-To do :
-# controlled animation
-
 assets
 
 trolley https://poly.google.com/view/9r3vGMUz2Hc
@@ -83,9 +77,9 @@ track
       </a-assets>
       <a-entity environment="preset: forest"></a-entity>
       
-      <a-entity id="camera-rig" animation="property: position; to: 1.5 0 -7; dur: 1500; easing: linear; startEvents:go;"
-                 animation__left="property: position; to: -2,7 0 -15; dur: 1500; easing: linear; startEvents:goleft;"
-                 animation__right="property: position; to: 3.4 0 -15; dur: 1500; easing: linear; startEvents:goright;"
+      <a-entity id="camera-rig" animation="property: position; to: 1.5 0 -7; dur: 5000; easing: linear; startEvents:go;"
+                 animation__left="property: position; to: -2,7 0 -15; dur: 5000; easing: linear; startEvents:goleft;"
+                 animation__right="property: position; to: 3.4 0 -15; dur: 5000; easing: linear; startEvents:goright;"
                 sound="src: (#startengine); autoplay: true">
         <a-entity class="instructions" text="value: Ready?" position="0.2 1.3 -0.4"></a-entity>
         <a-entity class="instructions" text="value: Look here to start." position="0.5 1.3 -0.4"></a-entity>
@@ -114,12 +108,10 @@ track
       <a-entity id="track3-2" class="track-segment" position="-0.07333 -3.26371 -15.96363" rotation="0 119.99" gltf-model="#track" scale="5 5 5"></a-entity>
       
       <a-entity id="human1" class="human" position="-3 0 -15" gltf-model="#morty"></a-entity>
-      <a-box datasender="Left" position="-3 3.5 -15" rotation="0 45 0" color="#4CC3D9"></a-box>
       
       <a-entity id="human2" class="human" position="3 0 -15" gltf-model="#morty"></a-entity>
       <a-entity id="human3" class="human" position="3.5 0.2 -15" gltf-model="#morty"></a-entity>
-      <a-entity id="human4" class="human" position="4 0 -15" gltf-model="#morty"></a-entity>      
-      <a-cylinder datasender="Right" position="3.5 3.5 -15" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
+      <a-entity id="human4" class="human" position="4 0 -15" gltf-model="#morty"></a-entity>
       
       <a-sky color="#ECECEC"></a-sky>
     </a-scene>
