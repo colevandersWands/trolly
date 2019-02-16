@@ -1,3 +1,30 @@
+/* global AFRAME experiment */
+AFRAME.registerComponent('experiment-setup', {
+  init: function () {
+    var el = this.el;
+    function addTarget(x, randomness){      
+      var newTarget = document.createElement("a-entity")
+      newTarget.setAttribute("gltf-model", "#morty")
+      if (randomness)
+        var position = {x:(-experiment.leftTargets/2 + x)+Math.random(), y:Math.random()/10, z:Math.random()}
+      else
+        var position = {x:(-experiment.leftTargets/2 + x), y:0, z:0}
+      newTarget.setAttribute("position",  position)
+      return newTarget
+    }
+    document.querySelector("#camera-rig").setAttribute("animation", "dur", experiment.animationDuration)
+    document.querySelector("#camera-rig").setAttribute("animation__left", "dur", experiment.animationDuration)
+    document.querySelector("#camera-rig").setAttribute("animation__right", "dur", experiment.animationDuration)
+    
+    for (var i=0; i<experiment.leftTargets; i++){
+      document.querySelector("#left-targets").appendChild( addTarget(i, experiment.randomness) )
+    }
+    for (var i=0; i<experiment.rightTargets; i++){
+      document.querySelector("#right-targets").appendChild( addTarget(i, experiment.randomness) )
+    }
+  }
+});
+
 AFRAME.registerComponent('cursor-listener', {
   init: function () {
     var el = this.el;
@@ -16,6 +43,7 @@ AFRAME.registerComponent('cursor-listener', {
       console.log( el.id, 'was clicked at' ); 
       switch ( el.id ){
         case "engine-start-button" :
+          experiment.ready = true;
           el.emit("pushed");
           document.querySelector("#camera-rig").components.sound.playSound();
           document.querySelector("#camera-rig").emit("go");
@@ -28,10 +56,16 @@ AFRAME.registerComponent('cursor-listener', {
               sendExperimentData("Right");
             }
           }, experiment.animationDuration);
-          setTimeout(function(){ 
+          setTimeout(function(){
+            // scream sound right before impact
             document.querySelector("#camera").components.sound.playSound();            
           }, 2 * experiment.animationDuration - 1000);
-          for (instruction of document.querySelectorAll(".instructions") )
+          setTimeout(function(){ 
+            // stop the engine sound slight after impact
+            document.querySelector("#camera-rig").components.sound.stopSound(); 
+            experiment.finished = true;
+          }, 2 * experiment.animationDuration + 1000);
+          for (var instruction of document.querySelectorAll(".instructions") )
             instruction.setAttribute("visible", false);
           break;
         case "lever" :
