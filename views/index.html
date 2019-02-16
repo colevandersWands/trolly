@@ -48,10 +48,18 @@ track
                   material="color: black; shader: flat">
         </a-entity>
       </a-entity>
+      
+      <a-entity id="lever" position="2 0.5 -7" geometry="primitive: cylinder; radius: 0.05" material="">
+        <a-sphere position="0 0.5 0" radius="0.1" color="red"></a-sphere>
+      </a-entity>
 
       <a-entity id="trolley" position="-0.2 -5.6 0.5" scale="5 5 5" gltf-model="https://fabien.benetou.fr/pub/home/assets_trolley_problem/trolley/model.gltf"></a-entity>
-      <a-entity id="track1" class="track-segment" position="3.47641 -3.26371 -5.85719" rotation="0 78.73" gltf-model="https://fabien.benetou.fr/pub/home/assets_trolley_problem/tracks/model.gltf" scale="5 5 5"></a-entity>
-      <a-entity id="track2" class="track-segment" position="4.27192 -3.26371 -9.82667" rotation="0 78.73" gltf-model="https://fabien.benetou.fr/pub/home/assets_trolley_problem/tracks/model.gltf" scale="5 5 5"></a-entity>
+      <a-entity id="track1-1" class="track-segment" position="3.47641 -3.26371 -5.85719" rotation="0 78.73" gltf-model="https://fabien.benetou.fr/pub/home/assets_trolley_problem/tracks/model.gltf" scale="5 5 5"></a-entity>
+      <a-entity id="track1-2" class="track-segment" position="4.27192 -3.26371 -9.82667" rotation="0 78.73" gltf-model="https://fabien.benetou.fr/pub/home/assets_trolley_problem/tracks/model.gltf" scale="5 5 5"></a-entity>
+      <a-entity id="track1-3" class="track-segment" position="5.08659 -3.26371 -13.92471" rotation="0 78.73" gltf-model="https://fabien.benetou.fr/pub/home/assets_trolley_problem/tracks/model.gltf" scale="5 5 5"></a-entity>
+      
+      <a-entity id="track3-1" class="track-segment" position="1.96955 -3.26371 -12.35657" rotation="0 119.99999999999999" gltf-model="https://fabien.benetou.fr/pub/home/assets_trolley_problem/tracks/model.gltf" scale="5 5 5"></a-entity>
+      <a-entity id="track3-2" class="track-segment" position="-0.07333 -3.26371 -15.96363" rotation="0 119.99999999999999" gltf-model="https://fabien.benetou.fr/pub/home/assets_trolley_problem/tracks/model.gltf" scale="5 5 5"></a-entity>
       
       <a-entity id="human1" class="human" position="-3 0 -15" gltf-model="url(https://fabien.benetou.fr/pub/home/assets_trolley_problem/morty/model.gltf)"></a-entity>
       <a-box datasender="Left" position="-3 3.5 -15" rotation="0 45 0" color="#4CC3D9"></a-box>
