@@ -3,6 +3,7 @@ AFRAME.registerComponent('cursor-listener', {
     var el = this.el;
 
     function sendExperimentData(data){
+      // should use Fetch instead
       const datapointAddRequest = new XMLHttpRequest();
       datapointAddRequest.onload = function() { console.log(this.responseText, " Check result at " + window.location.origin + "/results.html "); };
       datapointAddRequest.open('get', '/addDatapoint' + "?datapoint=" + encodeURIComponent(data), true );
@@ -29,11 +30,15 @@ AFRAME.registerComponent('cursor-listener', {
               sendExperimentData("Right");
             }
           }, experiment.animationDuration);
+          setTimeout(function(){ 
+            document.querySelector("#camera").components.sound.playSound();            
+          }, 2 * experiment.animationDuration - 1000);
           for (instruction of document.querySelectorAll(".instructions") )
             instruction.setAttribute("visible", false);
           break;
         case "lever" :
           // could be conditional on experiment.ready
+          document.querySelector("#lever").components.sound.playSound();
           el.emit("pushedlever");
           experiment.pushedLever = true;
         break;
@@ -45,9 +50,14 @@ AFRAME.registerComponent('cursor-listener', {
 
 /* 
 assets
-trolley https://poly.google.com/view/9r3vGMUz2Hc
-humans https://poly.google.com/view/46UhpqiHmS- 
-track https://poly.google.com/view/covd74kLslj
+ models
+  trolley https://poly.google.com/view/9r3vGMUz2Hc
+  humans https://poly.google.com/view/46UhpqiHmS- 
+  track https://poly.google.com/view/covd74kLslj
+ sounds
+  scream https://freesound.org/people/TheSubber13/sounds/239900/
+  engine https://freesound.org/people/Heigh-hoo/sounds/22095/
+  lever https://freesound.org/people/DrZoom/sounds/105376/
  
 unused
  https://poly.google.com/view/77Jr8NGPtHE

@@ -23,6 +23,8 @@ var experiment = {
         <a-asset-item id="trolley" src="https://fabien.benetou.fr/pub/home/assets_trolley_problem/trolley/model.gltf"></a-asset-item>
         <a-asset-item id="track" src="https://fabien.benetou.fr/pub/home/assets_trolley_problem/tracks/model.gltf"></a-asset-item>
         <audio id="startengine" src="https://fabien.benetou.fr/pub/home/assets_trolley_problem/startengine.mp3"></audio>
+        <audio id="leverpulled" src="https://fabien.benetou.fr/pub/home/assets_trolley_problem/lever.mp3"></audio>
+        <audio id="scream" src="https://fabien.benetou.fr/pub/home/assets_trolley_problem/scream.mp3"></audio>
       </a-assets>
       <a-entity environment="preset: forest"></a-entity>
       
@@ -35,17 +37,18 @@ var experiment = {
         <a-box cursor-listener id="engine-start-button" color="red" position="0.19325 1.36319 -0.44538" scale="0.2 0.1 0.02"
                 animation="property: position; to: 0.19325 1.36319 -0.5; dur: 500; easing: linear; startEvents:pushed;"></a-box>
         <a-entity id="movingtrolley" position="-0.2 -5.6 0.5" scale="5 5 5" gltf-model="#trolley"></a-entity>
-        <a-entity camera look-controls position="0 1.6 0">
+        <a-entity id="camera" camera look-controls position="0 1.6 0" sound="src: #scream;">
           <a-entity cursor="fuse: true; fuseTimeout: 500"
                     position="0 0 -0.3"
                     geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
-                    material="color: black; shader: flat">
+                    material="color: grey; shader: flat">
           </a-entity>
         </a-entity>
       </a-entity>
       
       <a-entity cursor-listener id="lever" position="2.64697 0.5 -7" geometry="primitive: cylinder; radius: 0.05" material=""
-                animation="property: position; to: 2.64697 0.1 -7; dur: 1500; easing: linear; startEvents:pushedlever;">
+                animation="property: position; to: 2.64697 0.1 -7; dur: 1500; easing: linear; startEvents:pushedlever;"
+                sound="src: #leverpulled;">
         <a-sphere position="0 0.5" radius="0.1" color="red"></a-sphere>
       </a-entity>
       
