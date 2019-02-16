@@ -43,16 +43,16 @@ app.get('/', function(request, response) {
   response.sendFile(__dirname + '/views/index.html');
 });
 
-// endpoint to add dream in the database
+// endpoint to add datapoint in the database
 app.get('/addDatapoint', function(request, response) {
   var stmt = db.prepare("INSERT INTO ThoughExperimentData VALUES (?)");
-  stmt.run( request.query.dream );
+  stmt.run( request.query.datapoint );
   stmt.finalize();
   response.send("added");
 });
 
 // endpoint to get all the datapoints in the database
-app.get('/getDatapoint', function(request, response) {
+app.get('/getDatapoints', function(request, response) {
   db.all('SELECT * from ThoughExperimentData', function(err, rows) {
     response.send(JSON.stringify(rows));
   });

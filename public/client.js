@@ -1,8 +1,6 @@
 // client-side js
 // run by the browser each time your view template referencing it is loaded
 
-console.log('hello world :o');
-
 let dreams = [];
 
 // define variables that reference elements on our page
@@ -17,15 +15,24 @@ const getDreamsListener = function() {
 
   // iterate through every dream and add it to our page
   dreams.forEach( function(row) {
-    appendNewDream(row.dream);
+    appendNewDream(row.datapoint);
   });
+}
+
+const addDreamListener = function() {
+  // parse our response to convert to JSON
+  console.log(this.responseText);
 }
 
 // request the dreams from our app's sqlite database
 const dreamRequest = new XMLHttpRequest();
 dreamRequest.onload = getDreamsListener;
-dreamRequest.open('get', '/getDreams');
+dreamRequest.open('get', '/getDatapoints');
 dreamRequest.send();
+  
+const dreamAddRequest = new XMLHttpRequest();
+dreamAddRequest.onload = addDreamListener;
+// assumed it went through...
 
 // a helper function that creates a list item for a given dream
 const appendNewDream = function(dream) {
@@ -42,6 +49,10 @@ dreamsForm.onsubmit = function(event) {
   // get dream value and add it to the list
   dreams.push(dreamInput.value);
   appendNewDream(dreamInput.value);
+  //dreamAddRequest.open('get', '/addDatapoint', {datapoint: dreamInput.value} );
+  dreamAddRequest.open('get', '/addDatapoint' + "?datapoint=" + dreamInput.value} );
+  "?author=" + param), true
+  dreamAddRequest.send();
 
   // reset form 
   dreamInput.value = '';

@@ -1,11 +1,4 @@
-<!-- This is a static file -->
-<!-- served from your routes in server.js -->
-
-<!-- You might want to try something fancier: -->
-<!-- html/nunjucks docs: https://mozilla.github.io/nunjucks/ -->
-<!-- pug: https://pugjs.org/ -->
-<!-- haml: http://haml.info/ -->
-<!-- hbs(handlebars): http://handlebarsjs.com/ -->
+<!-- Static file served from routes in server.js -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -26,14 +19,13 @@
   <body>
     <header>
       <h1>
-        A Dream of the Future
+        Results of thoughts experiments tried in VR
       </h1>
     </header>
 
     <main>
-      <p class="bold">Oh hi,</p>
       
-      <p>Tell me your hopes and dreams:</p>
+      <p>Datapoints:</p>
       
       <form>
         <input name="dream" type="text" maxlength="100" placeholder="Dreams!" aria-labelledby="submit-dream">
@@ -44,15 +36,6 @@
         <ul id="dreams"></ul>
       </section>
     </main>
-
-    <footer>
-      Made with <a href="https://glitch.com">Glitch</a>!
-    </footer>
-
-    <!-- include the Glitch button to show what the webpage is about and
-          to make it easier for folks to view source and remix -->
-    <div class="glitchButton" style="position:fixed;top:20px;right:20px;"></div>
-    <script src="https://button.glitch.me/button.js"></script>
 
   </body>
 </html>
