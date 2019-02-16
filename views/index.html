@@ -1,6 +1,7 @@
 <html>
   <head>
     <script src="https://aframe.io/releases/0.9.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-environment-component@1.1.0/dist/aframe-environment-component.min.js"></script>
   </head>
   <body>
 <script>
@@ -17,9 +18,25 @@ AFRAME.registerComponent('datasender', {
     });
   }
 });
+  
+  
+/* assets
+
+trolley https://poly.google.com/view/5a7AI35F2AK  
+humans
+ https://poly.google.com/view/46UhpqiHmS-
+ https://poly.google.com/view/77Jr8NGPtHE
+ https://poly.google.com/view/12EHxMhKrbo
+ https://poly.google.com/view/3YDLMGCBKnL
+ https://poly.google.com/view/eW81ovdlbcc
+ 
+track
+ https://poly.google.com/view/covd74kLslj
+*/
 </script>
   
     <a-scene>
+      <a-entity environment="preset: forest"></a-entity>
       
       <a-entity camera look-controls position="0 1.6 0">
         <a-entity cursor="fuse: true; fuseTimeout: 500"
@@ -32,7 +49,7 @@ AFRAME.registerComponent('datasender', {
       <a-box datasender="Left" position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
       <a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
       <a-cylinder datasender="Right" position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
-      <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
+      <a-plane position="0 0.1 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
       <a-sky color="#ECECEC"></a-sky>
     </a-scene>
   </body>
