@@ -10,10 +10,10 @@ var experiment = {
   pushedLever        : false,
   ready              : false,
   finished           : false,
-  leftTargets        : 1,
-  rightTargets       : 3,
+  leftTargets        : AFRAME.utils.getUrlParameter("leftTargets") || 1,
+  rightTargets       : AFRAME.utils.getUrlParameter("rightTargets") || 3,
   finished           : false,
-  animationDuration  : 10000, //ms
+  animationDuration  : AFRAME.utils.getUrlParameter("animationDuration") || 10000, //ms
 }
 </script>
   
