@@ -7,9 +7,6 @@ var bodyParser = require('body-parser');
 var app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// we've started you off with Express, 
-// but feel free to use whatever libs or frameworks you'd like through `package.json`.
-
 // http://expressjs.com/en/starter/static-files.html
 app.use(express.static('public'));
 
@@ -23,17 +20,17 @@ var db = new sqlite3.Database(dbFile);
 // if ./.data/sqlite.db does not exist, create it, otherwise print records to console
 db.serialize(function(){
   if (!exists) {
-    db.run('CREATE TABLE Dreams (dream TEXT)');
-    console.log('New table Dreams created!');
+    db.run('CREATE TABLE ThoughExperimentData (datapoint TEXT)');
+    console.log('New table ThoughExperimentData created!');
     
-    // insert default dreams
+    // insert default datapoint
     db.serialize(function() {
-      db.run('INSERT INTO Dreams (dream) VALUES ("Find and count some sheep"), ("Climb a really tall mountain"), ("Wash the dishes")');
+      db.run('INSERT INTO ThoughExperimentData (datapoint) VALUES ("Left"), ("Right"), ("Right")');
     });
   }
   else {
-    console.log('Database "Dreams" ready to go!');
-    db.each('SELECT * from Dreams', function(err, row) {
+    console.log('Database "ThoughExperimentData" ready to go!');
+    db.each('SELECT * from ThoughExperimentData', function(err, row) {
       if ( row ) {
         console.log('record:', row);
       }
@@ -46,11 +43,17 @@ app.get('/', function(request, response) {
   response.sendFile(__dirname + '/views/index.html');
 });
 
-// endpoint to get all the dreams in the database
-// currently this is the only endpoint, ie. adding dreams won't update the database
-// read the sqlite3 module docs and try to add your own! https://www.npmjs.com/package/sqlite3
-app.get('/getDreams', function(request, response) {
-  db.all('SELECT * from Dreams', function(err, rows) {
+// endpoint to add dream in the database
+app.get('/addDatapoint', function(request, response) {
+  var stmt = db.prepare("INSERT INTO ThoughExperimentData VALUES (?)");
+  stmt.run( request.query.dream );
+  stmt.finalize();
+  response.send("added");
+});
+
+// endpoint to get all the datapoints in the database
+app.get('/getDatapoint', function(request, response) {
+  db.all('SELECT * from ThoughExperimentData', function(err, rows) {
     response.send(JSON.stringify(rows));
   });
 });
