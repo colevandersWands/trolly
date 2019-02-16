@@ -2,70 +2,19 @@
   <head>
     <script src="https://aframe.io/releases/0.9.0/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-environment-component@1.1.0/dist/aframe-environment-component.min.js"></script>
+    <script src="/experience-logic.js"></script>
   </head>
   <body>
-<script>
-
-    
+<script>    
 var experiment = {
   pushedLever        : false,
   ready              : false,
   finished           : false,
-  animationDuration  : 5000, //ms
+  leftTargets        : 1,
+  rightTargets       : 3,
+  finished           : false,
+  animationDuration  : 10000, //ms
 }
-
-AFRAME.registerComponent('cursor-listener', {
-  init: function () {
-    var el = this.el;
-
-    function sendExperimentData(data){
-      const datapointAddRequest = new XMLHttpRequest();
-      datapointAddRequest.onload = function() { console.log(this.responseText, " Check result at " + window.location.origin + "/results.html "); };
-      datapointAddRequest.open('get', '/addDatapoint' + "?datapoint=" + encodeURIComponent(data), true );
-      datapointAddRequest.send();
-    }
-    
-    this.el.addEventListener('click', function (evt) {
-      console.log( el.id, 'was clicked at' ); 
-      switch ( el.id ){
-        case "engine-start-button" :
-          el.emit("pushed")
-          document.querySelector("#camera-rig").emit("go")
-          setTimeout(function(){ 
-            if ( experiment.pushedLever ){
-              el.emit("goleft")
-              sendExperimentData("Left")
-            } else {
-              el.emit("goright")
-              sendExperimentData("Right")
-            }
-          }, experiment.animationDuration);
-          for (instruction of document.querySelectorAll(".instructions") )
-            instruction.setAttribute("visible", false)
-          break;
-        case "lever" :
-          // could be conditional on experiment.ready
-          el.emit("pushedlever")
-          experiment.pushedLever = true;
-        break;
-      }
-    }); // end of event listener
-    
-  }
-});
-  
-  
-/* 
-assets
-trolley https://poly.google.com/view/9r3vGMUz2Hc
-humans https://poly.google.com/view/46UhpqiHmS- 
-track https://poly.google.com/view/covd74kLslj
- 
-unused
- https://poly.google.com/view/77Jr8NGPtHE
- https://poly.google.com/view/12EHxMhKrbo
- https://poly.google.com/view/3YDLMGCBKnL
-*/
 </script>
   
     <a-scene>
@@ -107,11 +56,15 @@ unused
       <a-entity id="track3-1" class="track-segment" position="1.96955 -3.26371 -12.35657" rotation="0 119.99" gltf-model="#track" scale="5 5 5"></a-entity>
       <a-entity id="track3-2" class="track-segment" position="-0.07333 -3.26371 -15.96363" rotation="0 119.99" gltf-model="#track" scale="5 5 5"></a-entity>
       
-      <a-entity id="human1" class="human" position="-3 0 -15" gltf-model="#morty"></a-entity>
+      <a-entity id="left-targets" class="human" position="-3 0 -15">        
+        <a-entity id="human1" class="human" position="0 0 0" gltf-model="#morty"></a-entity>
+      </a-entity>
       
-      <a-entity id="human2" class="human" position="3 0 -15" gltf-model="#morty"></a-entity>
-      <a-entity id="human3" class="human" position="3.5 0.2 -15" gltf-model="#morty"></a-entity>
-      <a-entity id="human4" class="human" position="4 0 -15" gltf-model="#morty"></a-entity>
+      <a-entity id="right-targets" class="human" position="3 0 -15">  
+        <a-entity id="human2" class="human" position="0 0 0" gltf-model="#morty"></a-entity>
+        <a-entity id="human3" class="human" position="3.5 0.2 -15" gltf-model="#morty"></a-entity>
+        <a-entity id="human4" class="human" position="4 0 -15" gltf-model="#morty"></a-entity>
+      </a-entity>
       
       <a-sky color="#ECECEC"></a-sky>
     </a-scene>
