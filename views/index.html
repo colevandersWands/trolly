@@ -5,22 +5,26 @@
   </head>
   <body>
 <script>
-var experiment = {}
-experiment.pushedLever = false;
-experiment.ready = false;
-experiment.finished = false;
-experiment.aninationDuration = 5000; //ms
-  
-function sendExperimentData(data){
-    const datapointAddRequest = new XMLHttpRequest();
-    datapointAddRequest.onload = function() { console.log(this.responseText, " Check result at " + window.location.origin + "/flat.html "); };
-    datapointAddRequest.open('get', '/addDatapoint' + "?datapoint=" + encodeURIComponent(data), true );
-    datapointAddRequest.send();
+
+    
+var experiment = {
+  pushedLever        : false,
+  ready              : false,
+  finished           : false,
+  animationDuration  : 5000, //ms
 }
-  
+
 AFRAME.registerComponent('cursor-listener', {
   init: function () {
-    var el = this.el
+    var el = this.el;
+
+    function sendExperimentData(data){
+      const datapointAddRequest = new XMLHttpRequest();
+      datapointAddRequest.onload = function() { console.log(this.responseText, " Check result at " + window.location.origin + "/results.html "); };
+      datapointAddRequest.open('get', '/addDatapoint' + "?datapoint=" + encodeURIComponent(data), true );
+      datapointAddRequest.send();
+    }
+    
     this.el.addEventListener('click', function (evt) {
       console.log( el.id, 'was clicked at' ); 
       switch ( el.id ){
@@ -35,7 +39,7 @@ AFRAME.registerComponent('cursor-listener', {
               el.emit("goright")
               sendExperimentData("Right")
             }
-          }, experiment.aninationDuration);
+          }, experiment.animationDuration);
           for (instruction of document.querySelectorAll(".instructions") )
             instruction.setAttribute("visible", false)
           break;
@@ -45,26 +49,22 @@ AFRAME.registerComponent('cursor-listener', {
           experiment.pushedLever = true;
         break;
       }
-      
-      
-    });
+    }); // end of event listener
+    
   }
 });
   
   
 /* 
 assets
-
 trolley https://poly.google.com/view/9r3vGMUz2Hc
-
-humans
- https://poly.google.com/view/46UhpqiHmS-
+humans https://poly.google.com/view/46UhpqiHmS- 
+track https://poly.google.com/view/covd74kLslj
+ 
+unused
  https://poly.google.com/view/77Jr8NGPtHE
  https://poly.google.com/view/12EHxMhKrbo
  https://poly.google.com/view/3YDLMGCBKnL
- 
-track
- https://poly.google.com/view/covd74kLslj
 */
 </script>
   
