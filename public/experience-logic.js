@@ -8,6 +8,7 @@ AFRAME.registerComponent('cursor-listener', {
       datapointAddRequest.open('get', '/addDatapoint' + "?datapoint=" + encodeURIComponent(data), true );
       datapointAddRequest.send();
     }
+    
     document.querySelector("#camera-rig").setAttribute("animation", "dur", experiment.animationDuration)
     document.querySelector("#camera-rig").setAttribute("animation__left", "dur", experiment.animationDuration)
     document.querySelector("#camera-rig").setAttribute("animation__right", "dur", experiment.animationDuration)
@@ -16,23 +17,24 @@ AFRAME.registerComponent('cursor-listener', {
       console.log( el.id, 'was clicked at' ); 
       switch ( el.id ){
         case "engine-start-button" :
-          el.emit("pushed")
-          document.querySelector("#camera-rig").emit("go")
+          el.emit("pushed");
+          document.querySelector("#camera-rig").components.sound.playSound();
+          document.querySelector("#camera-rig").emit("go");
           setTimeout(function(){ 
             if ( experiment.pushedLever ){
-              el.emit("goleft")
-              sendExperimentData("Left")
+              el.emit("goleft");
+              sendExperimentData("Left");
             } else {
-              el.emit("goright")
-              sendExperimentData("Right")
+              el.emit("goright");
+              sendExperimentData("Right");
             }
           }, experiment.animationDuration);
           for (instruction of document.querySelectorAll(".instructions") )
-            instruction.setAttribute("visible", false)
+            instruction.setAttribute("visible", false);
           break;
         case "lever" :
           // could be conditional on experiment.ready
-          el.emit("pushedlever")
+          el.emit("pushedlever");
           experiment.pushedLever = true;
         break;
       }
