@@ -10,11 +10,18 @@ const datapointsList = document.getElementById('datapoints');
 const getDatapointsListener = function() {
   // parse our response to convert to JSON
   datapoints = JSON.parse(this.responseText);
-
+  var value1 = 0
+  var value2 = 0
   // iterate through every datapoint and add it to our page
   datapoints.forEach( function(row) {
     appendNewDatapoint(row.datapoint);
+    if (row.datapoint == "Left")
+      value1++
+    else
+      value2++
   });
+  
+  generatePie(value1, value2) // from datapie.js
 }
 
 const addDatapointListener = function() {
