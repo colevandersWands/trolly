@@ -15,6 +15,12 @@ AFRAME.registerComponent('experiment-setup', {
     function addRail(position){      
       var rail = document.createElement("a-entity")
       
+      var location = document.createElement("a-entity")
+      location.setAttribute("scale", "5 5 5")
+      location.setAttribute("text", "value", AFRAME.utils.coordinates.stringify(position)
+                           + "\n\n" + AFRAME.utils.coordinates.stringify(location.object3D.getWorldPosition()) )
+      location.setAttribute("position", "0 1 0")
+      
       var leftRail = document.createElement("a-entity")
       leftRail.setAttribute("geometry", "depth: 4; height: 0.1; width: 0.1")
       leftRail.setAttribute("material", "color: #595959")
@@ -33,6 +39,7 @@ AFRAME.registerComponent('experiment-setup', {
         rail.appendChild(woordPart)
       }
       
+      rail.appendChild(location)
       rail.appendChild(leftRail)
       rail.appendChild(rightRail)
       rail.setAttribute("position",  position)
