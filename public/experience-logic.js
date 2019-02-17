@@ -65,7 +65,7 @@ AFRAME.registerComponent('experiment-setup', {
 
     // should now update the position target animation for the camera rig
     // based on 
-    // ("#right-targets") absolute coordinates
+    // ("#right-targets") absolute coordinates...
     // ("#left-targets")
     // ("#left-track")
   }
