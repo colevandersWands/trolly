@@ -13,7 +13,7 @@ var experiment = {
   leftTargets        : Number( AFRAME.utils.getUrlParameter("leftTargets") )      || 1,
   rightTargets       : Number( AFRAME.utils.getUrlParameter("rightTargets") )     || 3,
   animationDuration  : AFRAME.utils.getUrlParameter("animationDuration")          || 10000, //ms
-  trackParts         : Number( AFRAME.utils.getUrlParameter("trackParts") )       || 6,
+  trackParts         : Number( AFRAME.utils.getUrlParameter("trackParts") )       || 12,
   // internal application state
   pushedLever        : false,
   ready              : false,
@@ -51,21 +51,21 @@ var experiment = {
             </a-entity>
           </a-entity>
         </a-entity>
-
-        <a-entity cursor-listener id="lever" position="2.64697 0.5 -7" geometry="primitive: cylinder; radius: 0.05" material=""
-                  animation="property: position; to: 2.64697 0.1 -7; dur: 1500; easing: linear; startEvents:pushedlever;"
-                  sound="src: #leverpulled;">
-          <a-sphere position="0 0.5" radius="0.1" color="red"></a-sphere>
-        </a-entity>
         
-        <a-entity id="right-track" rotation="0 -15 0">        
-          <a-entity id="left-track" rotation="0 45 0" position="-2.5 0 -10"></a-entity>
+        <a-entity id="right-track" rotation="0 -15 0">
+          <a-entity id="right-targets" class="human" position="3 0 -15"
+                     animation="property: position; to: 3 -0.5 -15; dur: 1000; easing: linear; startEvents:down;"></a-entity>
+          <a-entity id="left-track" rotation="0 41 0" position="-1.3 0 -24">
+            <a-entity cursor-listener id="lever" position="0 0.5 3" geometry="primitive: cylinder; radius: 0.05" material=""
+                      animation="property: position; to: 0 0.1 3; dur: 1500; easing: linear; startEvents:pushedlever;"
+                      sound="src: #leverpulled;">
+              <a-sphere position="0 0.5" radius="0.1" color="red"></a-sphere>
+            </a-entity>
+            <a-entity id="left-targets" class="human" position="-3 0 -15"
+                     animation="property: position; to: -3 -0.5 -15; dur: 1000; easing: linear; startEvents:down;"></a-entity>      
+          </a-entity>
         </a-entity>        
        
-        <a-entity id="left-targets" class="human" position="-3 0 -15"
-                   animation="property: position; to: -3 -0.5 -15; dur: 1000; easing: linear; startEvents:down;"></a-entity>      
-        <a-entity id="right-targets" class="human" position="3 0 -15"
-                   animation="property: position; to: 3 -0.5 -15; dur: 1000; easing: linear; startEvents:down;"></a-entity>
       </a-entity>
       
       <a-sky color="#ECECEC"></a-sky>
