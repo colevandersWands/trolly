@@ -32,7 +32,7 @@ var experiment = {
       </a-assets>
       <a-entity environment="preset: forest"></a-entity>
       
-      <a-entity position="0 0 25">
+      <a-entity id="world" position="0 0 25">
 
         <a-entity id="camera-rig" animation="property: position; to: 1.5 0 -7; dur: 5000; easing: linear; startEvents:go;"
                    animation__left="property: position; to: -2,7 0 -15; dur: 5000; easing: linear; startEvents:goleft;"
@@ -57,14 +57,13 @@ var experiment = {
                   sound="src: #leverpulled;">
           <a-sphere position="0 0.5" radius="0.1" color="red"></a-sphere>
         </a-entity>
-
-        <a-entity id="track1" rotation="0 78.73 0" position="0 -3.26371 0">
-          <a-entity id="track1-1" class="track-segment" position="-3.47641 0 -5.85719" gltf-model="#track" scale="5 5 5"></a-entity>
-          <a-entity id="track1-2" class="track-segment" position="4.27192 0 -9.82667" gltf-model="#track" scale="5 5 5"></a-entity>
-          <a-entity id="track1-3" class="track-segment" position="5.08659 0 -13.92471" gltf-model="#track" scale="5 5 5"></a-entity>
-          <a-entity id="track1-4" class="track-segment" position="5.91029 0 -17.89004" gltf-model="#track" scale="5 5 5"></a-entity>
-        </a-entity>
         
+        
+        <a-entity id="track1-1" class="track-segment" position="3.47641 -3.26371 -5.85719" rotation="0 78.73" gltf-model="#track" scale="5 5 5"></a-entity>
+        <a-entity id="track1-2" class="track-segment" position="4.27192 -3.26371 -9.82667" rotation="0 78.73" gltf-model="#track" scale="5 5 5"></a-entity>
+        <a-entity id="track1-3" class="track-segment" position="5.08659 -3.26371 -13.92471" rotation="0 78.73" gltf-model="#track" scale="5 5 5"></a-entity>
+        <a-entity id="track1-4" class="track-segment" position="5.91029 -3.26371 -17.89004" rotation="0 78.73" gltf-model="#track" scale="5 5 5"></a-entity>
+
         <a-entity id="track3-1" class="track-segment" position="1.96955 -3.26371 -12.35657" rotation="0 119.99" gltf-model="#track" scale="5 5 5"></a-entity>
         <a-entity id="track3-2" class="track-segment" position="-0.07333 -3.26371 -15.96363" rotation="0 119.99" gltf-model="#track" scale="5 5 5"></a-entity>
         <a-entity id="track3-3" class="track-segment" position="-2.1109 -3.26371 -19.40892" rotation="0 119.99" gltf-model="#track" scale="5 5 5"></a-entity>

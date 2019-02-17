@@ -12,6 +12,17 @@ AFRAME.registerComponent('experiment-setup', {
       newTarget.setAttribute("position",  position)
       return newTarget
     }
+    function addRail(position){      
+      var newTarget = document.createElement("a-entity")
+      newTarget.setAttribute("gltf-model", "#morty")
+      if (randomness)
+        var position = {x:(-experiment.leftTargets/2 + x)+Math.random(), y:Math.random()/10, z:Math.random()}
+      else
+        var position = {x:(-experiment.leftTargets/2 + x), y:0, z:0}
+      newTarget.setAttribute("position",  position)
+      return newTarget
+    }
+    
     document.querySelector("#camera-rig").setAttribute("animation", "dur", experiment.animationDuration)
     document.querySelector("#camera-rig").setAttribute("animation__left", "dur", experiment.animationDuration)
     document.querySelector("#camera-rig").setAttribute("animation__right", "dur", experiment.animationDuration)
@@ -22,6 +33,15 @@ AFRAME.registerComponent('experiment-setup', {
     for (var i=0; i<experiment.rightTargets; i++){
       document.querySelector("#right-targets").appendChild( addTarget(i, experiment.randomness) )
     }
+    
+    for (var i=0; i<experiment.trackParts; i++){
+      var position = {x:0, y:0, z:0}
+      document.querySelector("#world").appendChild( addRail(position) )
+    }
+    <a-entity geometry="depth: 4; height: 0.1; width: 0.1" material="color: #595959" position="0.25 0" id="railright"></a-entity>
+    <a-entity geometry="depth: 0.1; height: 0.1" material="color: #542929" position="0 -0.1" id="railwood"></a-entity>
+    <a-entity geometry="depth: 4; height: 0.1; width: 0.1" material="color: #595959" position="-0.25 0" id="railleft"></a-entity>
+
   }
 });
 
