@@ -21,20 +21,20 @@ AFRAME.registerComponent('experiment-setup', {
       location.setAttribute("position", "0 1 0")
       
       var leftRail = document.createElement("a-entity")
-      leftRail.setAttribute("geometry", "depth: 4; height: 0.1; width: 0.1")
+      leftRail.setAttribute("geometry", "depth: " + experiment.trackLength + "; height: 0.1; width: 0.1")
       leftRail.setAttribute("material", "color: #595959")
       leftRail.setAttribute("position", "-0.25 0 0")
       
       var rightRail = document.createElement("a-entity")
-      rightRail.setAttribute("geometry", "depth: 4; height: 0.1; width: 0.1")
+      rightRail.setAttribute("geometry", "depth: " + experiment.trackLength + "; height: 0.1; width: 0.1")
       rightRail.setAttribute("material", "color: #595959")
       rightRail.setAttribute("position", "0.25 0 0")
       
-      for (var i=0; i<9; i++){
+      for (var i=0; i<experiment.trackLength*2; i++){
         var woordPart = document.createElement("a-entity")
         woordPart.setAttribute("geometry", "depth: 0.1; height: 0.1; width: 1")
         woordPart.setAttribute("material", "color: #542929")
-        woordPart.setAttribute("position", "0 -0.1 " + (i*4/10 - 2.5) )
+        woordPart.setAttribute("position", "0 -0.1 " + (i*experiment.trackLength/10 - 2.5) )
         rail.appendChild(woordPart)
       }
       
@@ -57,13 +57,13 @@ AFRAME.registerComponent('experiment-setup', {
     }
     
     for (var i=0; i<experiment.trackParts; i++){
-      var position = {x:0, y:0.2, z:-i*4}
+      var position = {x:0, y:0.2, z:-i*experiment.trackLength}
       document.querySelector("#right-track").appendChild( addRail(position) )
       position.y = -0.1
       document.querySelector("#right-targets").setAttribute("position", position )
     }
     for (var i=0; i<experiment.trackParts/2; i++){
-      var position = {x:0, y:0.2, z:-i*4}
+      var position = {x:0, y:0.2, z:-i*experiment.trackLength}
       document.querySelector("#left-track").appendChild( addRail(position) )
       position.y = -0.1
       document.querySelector("#left-targets").setAttribute("position", position )
@@ -74,6 +74,16 @@ AFRAME.registerComponent('experiment-setup', {
     // ("#right-targets") absolute coordinates...
     // ("#left-targets")
     // ("#left-track")
+    document.querySelector("#camera-rig").setAttribute("animation", "to", x + " 0 ")
+    document.querySelector("#camera-rig").setAttribute("animation__left", "to", experiment.animationDuration)
+    document.querySelector("#camera-rig").setAttribute("animation__right", "to", experiment.animationDuration)
+    
+    /*
+        <a-entity id="camera-rig  " animation="property: position; to:  5 0 -20; dur: 5000; easing: linear; startEvents:go;"
+                           an   imation__left="property: position; to: -6 0 -43; dur: 5000; easing: linear; startEvents:goleft;"
+                           animati  on__right="property: position; to: 11 0 -43; dur: 5000; easing: linear; startEvents:goright;"
+                   */
+   
   }
 });
 
