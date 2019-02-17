@@ -13,14 +13,30 @@ AFRAME.registerComponent('experiment-setup', {
       return newTarget
     }
     function addRail(position){      
-      var newTarget = document.createElement("a-entity")
-      newTarget.setAttribute("gltf-model", "#morty")
-      if (randomness)
-        var position = {x:(-experiment.leftTargets/2 + x)+Math.random(), y:Math.random()/10, z:Math.random()}
-      else
-        var position = {x:(-experiment.leftTargets/2 + x), y:0, z:0}
-      newTarget.setAttribute("position",  position)
-      return newTarget
+      var rail = document.createElement("a-entity")
+      
+      var leftRail = document.createElement("a-entity")
+      leftRail.setAttribute("geometry", "depth: 4; height: 0.1; width: 0.1")
+      leftRail.setAttribute("material", "color: #595959")
+      leftRail.setAttribute("position", "-0.25 0 0")
+      
+      var rightRail = document.createElement("a-entity")
+      rightRail.setAttribute("geometry", "depth: 4; height: 0.1; width: 0.1")
+      rightRail.setAttribute("material", "color: #595959")
+      rightRail.setAttribute("position", "0.25 0 0")
+      
+      for (var i=0; i<9; i++){
+        var woordPart = document.createElement("a-entity")
+        woordPart.setAttribute("geometry", "depth: 0.1; height: 0.1; width: 1")
+        woordPart.setAttribute("material", "color: #542929")
+        woordPart.setAttribute("position", "0 -0.1 " + (i*4/10 - 2) )
+        rail.appendChild(woordPart)
+      }
+      
+      rail.appendChild(leftRail)
+      rail.appendChild(rightRail)
+      rail.setAttribute("position",  position)
+      return rail
     }
     
     document.querySelector("#camera-rig").setAttribute("animation", "dur", experiment.animationDuration)
@@ -35,12 +51,9 @@ AFRAME.registerComponent('experiment-setup', {
     }
     
     for (var i=0; i<experiment.trackParts; i++){
-      var position = {x:0, y:0, z:0}
+      var position = {x:0, y:0.2, z:-i*4}
       document.querySelector("#world").appendChild( addRail(position) )
     }
-    <a-entity geometry="depth: 4; height: 0.1; width: 0.1" material="color: #595959" position="0.25 0" id="railright"></a-entity>
-    <a-entity geometry="depth: 0.1; height: 0.1" material="color: #542929" position="0 -0.1" id="railwood"></a-entity>
-    <a-entity geometry="depth: 4; height: 0.1; width: 0.1" material="color: #595959" position="-0.25 0" id="railleft"></a-entity>
 
   }
 });
