@@ -59,7 +59,12 @@ AFRAME.registerComponent('cursor-listener', {
           }, experiment.animationDuration);
           setTimeout(function(){
             // scream sound right before impact
-            document.querySelector("#camera").components.sound.playSound();            
+            document.querySelector("#camera").components.sound.playSound();
+            if ( experiment.pushedLever ){
+              document.querySelector("#left-targets").emit("down");
+            } else {
+              document.querySelector("#right-targets").emit("down");
+            }
           }, 2 * experiment.animationDuration - 1000);
           setTimeout(function(){ 
             // stop the engine sound slight after impact
