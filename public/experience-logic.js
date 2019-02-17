@@ -17,8 +17,7 @@ AFRAME.registerComponent('experiment-setup', {
       
       var location = document.createElement("a-entity")
       location.setAttribute("scale", "5 5 5")
-      location.setAttribute("text", "value", AFRAME.utils.coordinates.stringify(position)
-                           + "\n\n" + AFRAME.utils.coordinates.stringify(location.object3D.getWorldPosition()) )
+      location.setAttribute("text", "value", AFRAME.utils.coordinates.stringify(position) )
       location.setAttribute("position", "0 1 0")
       
       var leftRail = document.createElement("a-entity")
