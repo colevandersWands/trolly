@@ -63,6 +63,11 @@ AFRAME.registerComponent('experiment-setup', {
       document.querySelector("#left-targets").setAttribute("position", position )
     }
 
+    // should now update the position target animation for the camera rig
+    // based on 
+    // ("#right-targets") absolute coordinates
+    // ("#left-targets")
+    // ("#left-track")
   }
 });
 
