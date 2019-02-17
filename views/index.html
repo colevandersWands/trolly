@@ -13,8 +13,9 @@ var experiment = {
   leftTargets        : Number( AFRAME.utils.getUrlParameter("leftTargets") )      || 1,
   rightTargets       : Number( AFRAME.utils.getUrlParameter("rightTargets") )     || 3,
   animationDuration  : AFRAME.utils.getUrlParameter("animationDuration")          || 10, // seconds
-  trackParts         : Number( AFRAME.utils.getUrlParameter("trackParts") )       || 12, // buggy, safer to stick to 12 for now
-  trackLength        : Number( AFRAME.utils.getUrlParameter("trackLength") )      || 4, // buggy, safer to stick to 4 for now
+  trackParts         : Number( AFRAME.utils.getUrlParameter("trackParts") )       || 12,
+  trackLength        : Number( AFRAME.utils.getUrlParameter("trackLength") )      || 4,
+  debug              : ( AFRAME.utils.getUrlParameter("debug") === 'true')        || false,
   // internal application state
   pushedLever        : false,
   ready              : false,

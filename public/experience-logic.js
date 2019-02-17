@@ -38,7 +38,7 @@ AFRAME.registerComponent('experiment-setup', {
         rail.appendChild(woordPart)
       }
       
-      //rail.appendChild(location)
+      if (experiment.debug && console.vec3) rail.appendChild(location)
       rail.appendChild(leftRail)
       rail.appendChild(rightRail)
       rail.setAttribute("position",  position)
