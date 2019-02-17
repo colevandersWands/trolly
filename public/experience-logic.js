@@ -69,20 +69,9 @@ AFRAME.registerComponent('experiment-setup', {
       document.querySelector("#left-targets").setAttribute("position", position )
     }
 
-    // should now update the position target animation for the camera rig
-    // based on 
-    // ("#right-targets") absolute coordinates...
-    // ("#left-targets")
-    // ("#left-track")
-    document.querySelector("#camera-rig").setAttribute("animation", "to", x + " 0 ")
-    document.querySelector("#camera-rig").setAttribute("animation__left", "to", experiment.animationDuration)
-    document.querySelector("#camera-rig").setAttribute("animation__right", "to", experiment.animationDuration)
-    
-    /*
-        <a-entity id="camera-rig  " animation="property: position; to:  5 0 -20; dur: 5000; easing: linear; startEvents:go;"
-                           an   imation__left="property: position; to: -6 0 -43; dur: 5000; easing: linear; startEvents:goleft;"
-                           animati  on__right="property: position; to: 11 0 -43; dur: 5000; easing: linear; startEvents:goright;"
-                   */
+    document.querySelector("#camera-rig").setAttribute("animation", "to", experiment.trackParts/2 + " 0 " + -experiment.trackLength * (experiment.trackParts/2 - 1) )
+    document.querySelector("#camera-rig").setAttribute("animation__left", "to", -experiment.trackParts/2 + " 0 " + -experiment.trackLength * (experiment.trackParts - 1) )
+    document.querySelector("#camera-rig").setAttribute("animation__right", "to", experiment.trackParts + " 0 " + -experiment.trackLength * (experiment.trackParts - 1) )
    
   }
 });
