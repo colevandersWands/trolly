@@ -13,7 +13,7 @@ var experiment = {
   leftTargets        : Number( AFRAME.utils.getUrlParameter("leftTargets") )      || 1,
   rightTargets       : Number( AFRAME.utils.getUrlParameter("rightTargets") )     || 3,
   animationDuration  : AFRAME.utils.getUrlParameter("animationDuration")          || 10000, //ms
-  trackParts         : Number( AFRAME.utils.getUrlParameter("trackParts") )       || 3,
+  trackParts         : Number( AFRAME.utils.getUrlParameter("trackParts") )       || 6,
   // internal application state
   pushedLever        : false,
   ready              : false,
@@ -26,9 +26,9 @@ var experiment = {
         <a-asset-item id="morty" src="https://fabien.benetou.fr/pub/home/assets_trolley_problem/morty/model.gltf"></a-asset-item>
         <a-asset-item id="trolley" src="https://fabien.benetou.fr/pub/home/assets_trolley_problem/trolley/model.gltf"></a-asset-item>
         <a-asset-item id="track" src="https://fabien.benetou.fr/pub/home/assets_trolley_problem/tracks/model.gltf"></a-asset-item>
-        <audio id="startengine" src="https://fabien.benetou.fr/pub/home/assets_trolley_problem/startengine.mp3"></audio>
-        <audio id="leverpulled" src="https://fabien.benetou.fr/pub/home/assets_trolley_problem/lever.mp3"></audio>
-        <audio id="scream" src="https://fabien.benetou.fr/pub/home/assets_trolley_problem/scream.mp3"></audio>
+        <audio id="startengine" crossorigin="anonymous" src="https://fabien.benetou.fr/pub/home/assets_trolley_problem/startengine.mp3"></audio>
+        <audio id="leverpulled" crossorigin="anonymous" src="https://fabien.benetou.fr/pub/home/assets_trolley_problem/lever.mp3"></audio>
+        <audio id="scream" crossorigin="anonymous" src="https://fabien.benetou.fr/pub/home/assets_trolley_problem/scream.mp3"></audio>
       </a-assets>
       <a-entity environment="preset: forest"></a-entity>
       
@@ -58,16 +58,9 @@ var experiment = {
           <a-sphere position="0 0.5" radius="0.1" color="red"></a-sphere>
         </a-entity>
         
-        
-        <a-entity id="track1-1" class="track-segment" position="3.47641 -3.26371 -5.85719" rotation="0 78.73" gltf-model="#track" scale="5 5 5"></a-entity>
-        <a-entity id="track1-2" class="track-segment" position="4.27192 -3.26371 -9.82667" rotation="0 78.73" gltf-model="#track" scale="5 5 5"></a-entity>
-        <a-entity id="track1-3" class="track-segment" position="5.08659 -3.26371 -13.92471" rotation="0 78.73" gltf-model="#track" scale="5 5 5"></a-entity>
-        <a-entity id="track1-4" class="track-segment" position="5.91029 -3.26371 -17.89004" rotation="0 78.73" gltf-model="#track" scale="5 5 5"></a-entity>
-
-        <a-entity id="track3-1" class="track-segment" position="1.96955 -3.26371 -12.35657" rotation="0 119.99" gltf-model="#track" scale="5 5 5"></a-entity>
-        <a-entity id="track3-2" class="track-segment" position="-0.07333 -3.26371 -15.96363" rotation="0 119.99" gltf-model="#track" scale="5 5 5"></a-entity>
-        <a-entity id="track3-3" class="track-segment" position="-2.1109 -3.26371 -19.40892" rotation="0 119.99" gltf-model="#track" scale="5 5 5"></a-entity>
-
+        <a-entity id="left-track" rotation="0 12 0"></a-entity>
+        <a-entity id="right-track" rotation="0 -12 0"></a-entity>        
+       
         <a-entity id="left-targets" class="human" position="-3 0 -15"
                    animation="property: position; to: -3 -0.5 -15; dur: 1000; easing: linear; startEvents:down;"></a-entity>      
         <a-entity id="right-targets" class="human" position="3 0 -15"

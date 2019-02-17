@@ -29,7 +29,7 @@ AFRAME.registerComponent('experiment-setup', {
         var woordPart = document.createElement("a-entity")
         woordPart.setAttribute("geometry", "depth: 0.1; height: 0.1; width: 1")
         woordPart.setAttribute("material", "color: #542929")
-        woordPart.setAttribute("position", "0 -0.1 " + (i*4/10 - 2) )
+        woordPart.setAttribute("position", "0 -0.1 " + (i*4/10 - 2.5) )
         rail.appendChild(woordPart)
       }
       
@@ -52,7 +52,11 @@ AFRAME.registerComponent('experiment-setup', {
     
     for (var i=0; i<experiment.trackParts; i++){
       var position = {x:0, y:0.2, z:-i*4}
-      document.querySelector("#world").appendChild( addRail(position) )
+      document.querySelector("#right-track").appendChild( addRail(position) )
+    }
+    for (var i=0; i<experiment.trackParts/2; i++){
+      var position = {x:0, y:0.2, z:-i*4}
+      document.querySelector("#left-track").appendChild( addRail(position) )
     }
 
   }
