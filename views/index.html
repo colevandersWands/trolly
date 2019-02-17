@@ -58,8 +58,9 @@ var experiment = {
           <a-sphere position="0 0.5" radius="0.1" color="red"></a-sphere>
         </a-entity>
         
-        <a-entity id="left-track" rotation="0 12 0"></a-entity>
-        <a-entity id="right-track" rotation="0 -12 0"></a-entity>        
+        <a-entity id="right-track" rotation="0 -15 0">        
+          <a-entity id="left-track" rotation="0 75 0"></a-entity>
+        </a-entity>        
        
         <a-entity id="left-targets" class="human" position="-3 0 -15"
                    animation="property: position; to: -3 -0.5 -15; dur: 1000; easing: linear; startEvents:down;"></a-entity>      

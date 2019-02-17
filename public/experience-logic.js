@@ -55,7 +55,7 @@ AFRAME.registerComponent('experiment-setup', {
       document.querySelector("#right-track").appendChild( addRail(position) )
     }
     for (var i=0; i<experiment.trackParts/2; i++){
-      var position = {x:0, y:0.2, z:-i*4}
+      var position = {x:experiment.trackParts/2*4, y:0.2, z:-i*4 - experiment.trackParts/2*4}
       document.querySelector("#left-track").appendChild( addRail(position) )
     }
 
