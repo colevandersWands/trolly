@@ -38,16 +38,16 @@ AFRAME.registerComponent('experiment-setup', {
         rail.appendChild(woordPart)
       }
       
-      rail.appendChild(location)
+      //rail.appendChild(location)
       rail.appendChild(leftRail)
       rail.appendChild(rightRail)
       rail.setAttribute("position",  position)
       return rail
     }
     
-    document.querySelector("#camera-rig").setAttribute("animation", "dur", experiment.animationDuration)
-    document.querySelector("#camera-rig").setAttribute("animation__left", "dur", experiment.animationDuration)
-    document.querySelector("#camera-rig").setAttribute("animation__right", "dur", experiment.animationDuration)
+    document.querySelector("#camera-rig").setAttribute("animation", "dur", experiment.animationDuration * 1000)
+    document.querySelector("#camera-rig").setAttribute("animation__left", "dur", experiment.animationDuration * 1000)
+    document.querySelector("#camera-rig").setAttribute("animation__right", "dur", experiment.animationDuration * 1000)
     
     for (var i=0; i<experiment.leftTargets; i++){
       document.querySelector("#left-targets").appendChild( addTarget(i, experiment.randomness) )
@@ -107,7 +107,7 @@ AFRAME.registerComponent('cursor-listener', {
               el.emit("goright");
               sendExperimentData("Right");
             }
-          }, experiment.animationDuration);
+          }, experiment.animationDuration * 1000);
           setTimeout(function(){
             // scream sound right before impact
             document.querySelector("#camera").components.sound.playSound();
@@ -116,12 +116,12 @@ AFRAME.registerComponent('cursor-listener', {
             } else {
               document.querySelector("#right-targets").emit("down");
             }
-          }, 2 * experiment.animationDuration - 1000);
+          }, 2 * experiment.animationDuration * 1000 - 1000);
           setTimeout(function(){ 
             // stop the engine sound slight after impact
             document.querySelector("#camera-rig").components.sound.stopSound(); 
             experiment.finished = true;
-          }, 2 * experiment.animationDuration + 1000);
+          }, 2 * experiment.animationDuration * 1000 + 1000);
           for (var instruction of document.querySelectorAll(".instructions") )
             instruction.setAttribute("visible", false);
           break;
