@@ -69,6 +69,8 @@ AFRAME.registerComponent('experiment-setup', {
       document.querySelector("#left-targets").setAttribute("position", position )
     }
 
+    // should also fix "left-track" position accordingly <a-entity id="left-track" rotation="0 41 0" position="-1.3 0 -24">
+    document.querySelector("#left-track").setAttribute("position", -experiment.trackParts/10 + " 0 " + -experiment.trackParts*2 )
     document.querySelector("#camera-rig").setAttribute("animation", "to", experiment.trackParts/2 + " 0 " + -experiment.trackLength * (experiment.trackParts/2 - 1) )
     document.querySelector("#camera-rig").setAttribute("animation__left", "to", -experiment.trackParts/2 + " 0 " + -experiment.trackLength * (experiment.trackParts - 1) )
     document.querySelector("#camera-rig").setAttribute("animation__right", "to", experiment.trackParts + " 0 " + -experiment.trackLength * (experiment.trackParts - 1) )
