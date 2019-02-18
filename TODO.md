@@ -6,7 +6,7 @@ VR experiences philosophical, configurable and remixable
 1. improve "death" animations
 1. update Github with image preview
 1. named (even if using hash) experiences (since the Glitch name is not sufficient)
-1. keep track of parent Glitch (should be possible to set env variable via remixing link) to be able to reconstruct an experiment phylogeny 
+1. keep track of parent Glitch (should be possible to set env variable via remixing link) to be able to reconstruct an experiment phylogeny. project ids of the upstream projects in the environment variables as `$PROJECT_REMIX_CHAIN`.
 1. better data structure in the db to include experience name and timestamp
 1. add preview in configurator via iframe or images
 1. try physics for "death" animations (but non deterministic)
