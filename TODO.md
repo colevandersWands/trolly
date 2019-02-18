@@ -10,3 +10,7 @@ VR experiences philosophical, configurable and remixable
 1. better data structure in the db to include experience name and timestamp
 1. add preview in configurator via iframe or images
 1. try physics for "death" animations (but non deterministic)
+1. networked version to get events to make sure all runs as expected
+1. experiment variations
+    1. impossible physics
+1. add older slide on non euclydian geometry visit
