@@ -20,7 +20,7 @@ var db = new sqlite3.Database(dbFile);
 // if ./.data/sqlite.db does not exist, create it, otherwise print records to console
 db.serialize(function(){
   if (!exists) {
-    db.run('CREATE TABLE ThoughExperimentData (datapoint TEXT)');
+    db.run('CREATE TABLE ThoughtExperimentData (datapoint TEXT)');
     console.log('New table ThoughExperimentData created!');
     
     // insert default datapoint
