@@ -38,14 +38,15 @@ db.serialize(function(){
   }
 });
 
-// // http://expressjs.com/en/starter/basic-routing.html
-// app.get('/', function(request, response) {
-//   response.sendFile(__dirname + '/public/configurator.html');
-// });
-
+// http://expressjs.com/en/starter/basic-routing.html
 app.get('/', function(request, response) {
-    response.sendFile(__dirname + '/views/index.html');
+  response.sendFile(__dirname + '/views/configurator.html');
 });
+
+app.get('/experience', function(request, response) {
+  response.sendFile(__dirname + '/views/experience.html');
+});
+
 
 // endpoint to add datapoint in the database
 app.get('/addDatapoint', function(request, response) {
@@ -66,6 +67,6 @@ app.get('/getDatapoints', function(request, response) {
 });
 
 // listen for requests :)
-var listener = app.listen(process.env.PORT, function() {
+var listener = app.listen(process.env.PORT || 3000, function() {
   console.log('Your app is listening on port ' + listener.address().port);
 });

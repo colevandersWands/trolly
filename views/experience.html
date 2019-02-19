@@ -16,7 +16,7 @@ var experiment = {
   trackParts         : Number( AFRAME.utils.getUrlParameter("trackParts") )       || 12,
   trackLength        : Number( AFRAME.utils.getUrlParameter("trackLength") )      || 4,
   debug              : ( AFRAME.utils.getUrlParameter("debug") === 'true')        || false,
-  perspect           : ( AFRAME.utils.getUrlParameter("perspect") )               || 'bystander',
+  perspect           : ( AFRAME.utils.getUrlParameter("perspect") )               || 'trolly-rig',
   // internal application state
   pushedLever        : false,
   ready              : false,
@@ -43,7 +43,7 @@ var experiment = {
           <a-entity id="movingtrolley" position="-0.2 -5.6 0.5" scale="5 5 5" gltf-model="#trolley"></a-entity>
         </a-entity>
 
-        <a-entity id='bird' position='0 15 -12'></a-entity>  
+        <a-entity id='bird' position='8 10 -12'></a-entity>  
 
         <a-entity id='bystander' position='10 1 -20' rotation="0 75 0"></a-entity>  
 
