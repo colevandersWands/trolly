@@ -38,9 +38,13 @@ db.serialize(function(){
   }
 });
 
-// http://expressjs.com/en/starter/basic-routing.html
+// // http://expressjs.com/en/starter/basic-routing.html
+// app.get('/', function(request, response) {
+//   response.sendFile(__dirname + '/public/configurator.html');
+// });
+
 app.get('/', function(request, response) {
-  response.sendFile(__dirname + '/views/index.html');
+    response.sendFile(__dirname + '/views/index.html');
 });
 
 // endpoint to add datapoint in the database
