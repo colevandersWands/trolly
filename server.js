@@ -21,16 +21,16 @@ var db = new sqlite3.Database(dbFile);
 db.serialize(function(){
   if (!exists) {
     db.run('CREATE TABLE ThoughtExperimentData (datapoint TEXT)');
-    console.log('New table ThoughExperimentData created!');
+    console.log('New table ThoughtExperimentData created!');
     
     // insert default datapoint
     db.serialize(function() {
-      db.run('INSERT INTO ThoughExperimentData (datapoint) VALUES ("Left"), ("Right"), ("Right")');
+      db.run('INSERT INTO ThoughtExperimentData (datapoint) VALUES ("Left"), ("Right"), ("Right")');
     });
   }
   else {
-    console.log('Database "ThoughExperimentData" ready to go!');
-    db.each('SELECT * from ThoughExperimentData', function(err, row) {
+    console.log('Database "ThoughtExperimentData" ready to go!');
+    db.each('SELECT * from ThoughtExperimentData', function(err, row) {
       if ( row ) {
         console.log('record:', row);
       }
