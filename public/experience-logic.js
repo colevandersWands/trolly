@@ -1,15 +1,57 @@
-/* global AFRAME experiment */
+
 AFRAME.registerComponent('experiment-setup', {
   init: function () {
     var el = this.el;
+
+    (function set_perspective(persp) {
+      var ready = document.createElement("a-entity");
+      ready.setAttribute("class", "instructions");
+      ready.setAttribute("text", "value: Ready?");
+      ready.setAttribute("position", "0.2 1.3 -0.4");
+
+      var look = document.createElement("a-entity");
+      look.setAttribute("class", "instructions");
+      look.setAttribute("text", "value: Look here to start.");
+      look.setAttribute("position", "0.5 1.3 -0.4")
+
+      var button = document.createElement("a-box");
+      button.setAttribute("cursor-listener", "");
+      button.setAttribute("id", "engine-start-button");
+      button.setAttribute("color", "red");
+      button.setAttribute("opacity", "1");
+      button.setAttribute("position", "0.19325 1.36319 -0.44538");
+      button.setAttribute("scale", "0.2 0.1 0.02");
+      button.setAttribute("animation", "property: opacity; from: 1; to: 0; dur: 500; startEvents:pushed;");
+
+      var camera = document.createElement("a-entity");
+      camera.setAttribute("id", "camera");
+      camera.setAttribute("camera", "");
+      camera.setAttribute("look-controls", "");
+      camera.setAttribute("position", "0 1.6 0");
+      camera.setAttribute("sound", "src: #scream;");
+      var cursor = document.createElement("a-entity");
+      cursor.setAttribute("cursor", "fuse: true; fuseTimeout: 500");
+      cursor.setAttribute("position", "0 0 -0.3");
+      cursor.setAttribute("geometry", "primitive: ring; radiusInner: 0.005; radiusOuter: 0.008");
+      cursor.setAttribute("material", "color: grey; shader: flat");
+      camera.appendChild(cursor);
+
+      var perspective = document.getElementById(persp);
+      perspective.appendChild(ready);
+      perspective.appendChild(look);
+      perspective.appendChild(button);
+      perspective.appendChild(camera);
+    })(experiment.perspect);
+
     function addTarget(x, randomness){      
       var newTarget = document.createElement("a-entity")
-      newTarget.setAttribute("gltf-model", "#morty")
+      newTarget.setAttribute("gltf-model", "#person")
       if (randomness)
-        var position = {x:(-experiment.leftTargets/2 + x)+Math.random(), y:Math.random()/10, z:Math.random()}
+        var position = {x:(-experiment.leftTargets/2 + x/2)+Math.random() - 1.5, y:Math.random()/10, z:Math.random()}
       else
-        var position = {x:(-experiment.leftTargets/2 + x), y:0, z:0}
-      newTarget.setAttribute("position",  position)
+        var position = {x:(-experiment.leftTargets/2 + x/2) - 1.5, y:0, z:0}
+      newTarget.setAttribute("position",  position);
+      newTarget.setAttribute("scale",  "2 2 2");
       return newTarget
     }
     function addRail(position){      
@@ -45,9 +87,9 @@ AFRAME.registerComponent('experiment-setup', {
       return rail
     }
     
-    document.querySelector("#camera-rig").setAttribute("animation", "dur", experiment.animationDuration * 1000)
-    document.querySelector("#camera-rig").setAttribute("animation__left", "dur", experiment.animationDuration * 1000)
-    document.querySelector("#camera-rig").setAttribute("animation__right", "dur", experiment.animationDuration * 1000)
+    document.querySelector("#trolly-rig").setAttribute("animation", "dur", experiment.animationDuration * 1000)
+    document.querySelector("#trolly-rig").setAttribute("animation__left", "dur", experiment.animationDuration * 1000)
+    document.querySelector("#trolly-rig").setAttribute("animation__right", "dur", experiment.animationDuration * 1000)
     
     for (var i=0; i<experiment.leftTargets; i++){
       document.querySelector("#left-targets").appendChild( addTarget(i, experiment.randomness) )
@@ -71,9 +113,9 @@ AFRAME.registerComponent('experiment-setup', {
 
     // should also fix "left-track" position accordingly <a-entity id="left-track" rotation="0 41 0" position="-1.3 0 -24">
     document.querySelector("#left-track").setAttribute("position", -experiment.trackParts/10 + " 0 " + -experiment.trackParts*2 )
-    document.querySelector("#camera-rig").setAttribute("animation", "to", experiment.trackParts/2 + " 0 " + -experiment.trackLength * (experiment.trackParts/2 - 1) )
-    document.querySelector("#camera-rig").setAttribute("animation__left", "to", -experiment.trackParts/2 + " 0 " + -experiment.trackLength * (experiment.trackParts - 1) )
-    document.querySelector("#camera-rig").setAttribute("animation__right", "to", experiment.trackParts + " 0 " + -experiment.trackLength * (experiment.trackParts - 1) )
+    document.querySelector("#trolly-rig").setAttribute("animation", "to", experiment.trackParts/2 + " 0 " + -experiment.trackLength * (experiment.trackParts/2 - 1) )
+    document.querySelector("#trolly-rig").setAttribute("animation__left", "to", -experiment.trackParts/2 + " 0 " + -experiment.trackLength * (experiment.trackParts - 1) )
+    document.querySelector("#trolly-rig").setAttribute("animation__right", "to", experiment.trackParts + " 0 " + -experiment.trackLength * (experiment.trackParts - 1) )
    
   }
 });
@@ -99,8 +141,8 @@ AFRAME.registerComponent('cursor-listener', {
         case "engine-start-button" :
           experiment.ready = true;
           el.emit("pushed");
-          document.querySelector("#camera-rig").components.sound.playSound();
-          document.querySelector("#camera-rig").emit("go");
+          document.querySelector("#trolly-rig").components.sound.playSound();
+          document.querySelector("#trolly-rig").emit("go");
           setTimeout(function(){ 
             if ( experiment.pushedLever ){
               el.emit("goleft");
@@ -121,11 +163,13 @@ AFRAME.registerComponent('cursor-listener', {
           }, 2 * experiment.animationDuration * 1000 - 1000);
           setTimeout(function(){ 
             // stop the engine sound slight after impact
-            document.querySelector("#camera-rig").components.sound.stopSound(); 
+            document.querySelector("#trolly-rig").components.sound.stopSound(); 
             experiment.finished = true;
           }, 2 * experiment.animationDuration * 1000 + 1000);
           for (var instruction of document.querySelectorAll(".instructions") )
             instruction.setAttribute("visible", false);
+          var button = document.getElementById("engine-start-button");
+          button.parentNode.removeChild(button);
           break;
         case "lever" :
           // could be conditional on experiment.ready
@@ -138,12 +182,11 @@ AFRAME.registerComponent('cursor-listener', {
     
   }
 });
-
 /* 
 assets
  models
   trolley https://poly.google.com/view/9r3vGMUz2Hc
-  humans https://poly.google.com/view/46UhpqiHmS- 
+  humans https://poly.google.com/view/5aIIOhHbQgn
   track https://poly.google.com/view/covd74kLslj
  sounds
   scream https://freesound.org/people/TheSubber13/sounds/239900/
@@ -153,5 +196,4 @@ assets
 unused
  https://poly.google.com/view/77Jr8NGPtHE
  https://poly.google.com/view/12EHxMhKrbo
- https://poly.google.com/view/3YDLMGCBKnL
-*/
+ https://poly.google.com/view/3YDLMGCBKnL*/

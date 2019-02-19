@@ -16,6 +16,7 @@ var experiment = {
   trackParts         : Number( AFRAME.utils.getUrlParameter("trackParts") )       || 12,
   trackLength        : Number( AFRAME.utils.getUrlParameter("trackLength") )      || 4,
   debug              : ( AFRAME.utils.getUrlParameter("debug") === 'true')        || false,
+  perspect           : ( AFRAME.utils.getUrlParameter("perspect") )               || 'conductor',
   // internal application state
   pushedLever        : false,
   ready              : false,
@@ -23,35 +24,33 @@ var experiment = {
 }
 </script>
   
-    <a-scene experiment-setup>
+    <a-scene debug experiment-setup>
       <a-assets>
-        <a-asset-item id="morty" src="https://fabien.benetou.fr/pub/home/assets_trolley_problem/morty/model.gltf"></a-asset-item>
+        <a-asset-item id="person" src="./person/model.gltf"></a-asset-item>
         <a-asset-item id="trolley" src="https://fabien.benetou.fr/pub/home/assets_trolley_problem/trolley/model.gltf"></a-asset-item>
         <audio id="startengine" crossorigin="anonymous" src="https://fabien.benetou.fr/pub/home/assets_trolley_problem/startengine.mp3"></audio>
         <audio id="leverpulled" crossorigin="anonymous" src="https://fabien.benetou.fr/pub/home/assets_trolley_problem/lever.mp3"></audio>
         <audio id="scream" crossorigin="anonymous" src="https://fabien.benetou.fr/pub/home/assets_trolley_problem/scream.mp3"></audio>
       </a-assets>
-      <a-entity environment="preset: forest"></a-entity>
+      <a-entity environment="preset: default"></a-entity>
       
       <a-entity id="world" position="0 0 25">
 
-        <a-entity id="camera-rig" animation="property: position; easing: linear; startEvents:go;"
-                   animation__left="property: position; asing: linear; startEvents:goleft;"
+        <a-entity id="trolly-rig" animation="property: position; easing: linear; startEvents:go;"
+                   animation__left="property: position; easing: linear; startEvents:goleft;"
                    animation__right="property: position; easing: linear; startEvents:goright;"
                   sound="src: #startengine;">
-          <a-entity class="instructions" text="value: Ready?" position="0.2 1.3 -0.4"></a-entity>
-          <a-entity class="instructions" text="value: Look here to start." position="0.5 1.3 -0.4"></a-entity>
-          <a-box cursor-listener id="engine-start-button" color="red" position="0.19325 1.36319 -0.44538" scale="0.2 0.1 0.02"
-                  animation="property: object3D.position.z; to: -0.5; dur: 500; easing: linear; startEvents:pushed;"></a-box>
           <a-entity id="movingtrolley" position="-0.2 -5.6 0.5" scale="5 5 5" gltf-model="#trolley"></a-entity>
-          <a-entity id="camera" camera look-controls position="0 1.6 0" sound="src: #scream;">
-            <a-entity cursor="fuse: true; fuseTimeout: 500"
-                      position="0 0 -0.3"
-                      geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
-                      material="color: grey; shader: flat">
-            </a-entity>
-          </a-entity>
         </a-entity>
+
+        <a-entity id='bird' position='0 15 -12'></a-entity>  
+
+        <a-entity id='bystander' position='10 1 -20' rotation="0 75 0"></a-entity>  
+
+        <a-entity id='r-track' position='11.5 .5 -43' rotation="0 160 0"></a-entity>  
+
+        <a-entity id='l-track' position='-4 .5 -43' rotation="0 200 0"></a-entity>  
+
         
         <a-entity id="right-track" rotation="0 -15 0">
           <a-entity id="right-targets" class="human"
