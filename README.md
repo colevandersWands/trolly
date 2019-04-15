@@ -1,3 +1,5 @@
+> most recent version [on glitch](https://glitch.com/edit/#!/perspectives), prepared for [Fabien's presentation](https://fabien.benetou.fr/Testing/PhilosophicalFoundationsOfXR) at Leuven
+
 VR experiences philosophical, configurable and remixable
 ------------
 
